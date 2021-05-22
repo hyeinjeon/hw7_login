@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .mainbox {
+              background-color: rgba(255, 255, 255, 0.534);
+              width: 70%;
+              margin: 70px auto;
+              padding: 70px;
+              border-style: none;
+              border-radius: 50px;
+            }
+
+    h1 {
+        font-family: impact;
+    }
+</style>
+
+<div class="mainbox">
+
+<h1>Sign Up</h1>
+
+<form action="{% url 'signup' %}" method="post" >
+    {%csrf_token%}
+    {{form.as_p}}
+    <button type="submit">submit</button>
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+
+        .container{
+            background-color: rgba(255, 255, 255, 0.534);
+            border-style: none;
+            padding: 50px;
+            margin: 50px auto;
+            border-radius: 50px;
+        }
+
+        .post {
+            display: inline-block;
+            padding: 0px;
+            margin: 20px;
+            border-style: outset;
+            width: 205px;
+            height: 490px;
+            vertical-align: middle;
+        }
+
+        h1, h2 {
+            font-family: impact;
+        }
+
+        p {
+            font-family: Georgia;
+        }
+
+    </style>
+
+    <div>
+    <p>
+    {% if user.is_authenticated %}
+    안녕하세요. {{user.username}}님. <br>
+    {{user.university}}에 다니고,
+    {{user.location}}에 사시는 
+    {{user.nickname}} 군요. 
+    {% endif %}
+    </p>    
+    </div>
+
+    <h1>Music</h1>
+
+    <div>
+    {% for blog in posts %}
+        <span class="post">
+            {% if blog.image %}
+                <img src="{{blog.image_thumbnail.url}}">
+            {% endif %}
+            <br><br>
+            <h2>{{blog.title}}</h2>
+            <h5>{{blog.writer}}</h5>
+            {{blog.summary}}<br>
+            <a href = "{% url 'detail' blog.id %}">...more</a>
+            <br><br>
+        </span>
+    {% endfor %}
+    </div>
+
+    <div>
+    {# First Previous #}
+    {% if posts.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{posts.previous_page_number}}">Previous</a>
+    {% endif %}
+
+    {# 3of4 #}
+    <span>{{posts.number}}</span>
+    <span>of</span>
+    <span>{{posts.paginator.num_pages}}</span>
+
+    {# Next Last #}
+    {% if posts.has_next %}
+    <a href="?page={{posts.next_page_number}}">Next</a>
+    <a href="?page={{posts.paginator.num_pages}}">Last</a>
+    {% endif %}
+    </div>
+
+{% endblock %}

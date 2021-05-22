@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .mainbox {
+          background-color: rgba(255, 255, 255, 0.534);
+          width: 70%;
+          margin: 30px auto;
+          padding: 30px;
+          border-style: none;
+          border-radius: 50px;
+        }
+
+    h1 {
+        font-family: impact;
+    }
+</style>
+
+<div class="mainbox">
+<h1>Update</h1>
+<form method="POST" enctype="multipart/form-data">
+    {%csrf_token%}
+    {{ edit_post.as_p }}
+    <button type="submit">submit</button>
+</form>
+</div>
+{% endblock %}
